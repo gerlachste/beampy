@@ -286,6 +286,7 @@ def latex2svg(latexstring, write_tmpsvg=False):
 
     #Write the document to a tmp file
     tmpfile, tmpnam = tempfile.mkstemp(prefix='beampytmp')
+    os.close(tmpfile)
     #print tmpnam
     tmppath = tmpnam.replace(os.path.basename(tmpnam), '')
     #print tmppath
@@ -767,8 +768,9 @@ def render_texts(elements_to_render=None, extra_packages=None):
         # Write the file to latex
 
         tmpfile, tmpname = tempfile.mkstemp(prefix='beampytmp')
+        os.close(tmpfile)
         tmppath = tmpname.replace(os.path.basename(tmpname), '')
-
+        
         with open( tmpname + '.tex','w') as f:
             f.write(latex_header)
             f.write('\n \\newpage \n'.join(latex_pages))
